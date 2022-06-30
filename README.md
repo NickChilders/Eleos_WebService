@@ -1,8 +1,8 @@
 # Eleos_WebService
  
 ## Endpoints:
-/authenticate 
-/loads
-/messages
+ /authenticate <br /> 
+ /loads <br />
+ /messages <br />
  
-## Update: Still in production.
+### Update: Still in production.
