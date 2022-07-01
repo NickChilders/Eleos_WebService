@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Message = require('../models/messageModel');
+const { rawListeners, findOne } = require('../models/userModel');
 
 const sendMessage = asyncHandler (async (req, res) => {
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
@@ -17,7 +18,13 @@ const sendMessage = asyncHandler (async (req, res) => {
         } = req.body
         if(!direction || !username || !message_type || !composed_at || !platform_received_at){
             res.status(400)
-            throw new Error('Please add all required fields: direction, username, message_type, composed_at, platform_received_at');
+            throw new Error('Please add all required fields: direction, username, message_type, composed_at, platform_received_at')
+        }
+        const findUser = await User.findOne({username});
+        if(findUser._id != req.params.handle){
+            res.status(400);
+            console.log('Error: Invalid Handle')
+            throw new Error('Error: Invalid Handle')
         }
         const newMessage = new Message({
             direction: direction,
