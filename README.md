@@ -8,7 +8,7 @@
 &emsp; /messages <br />
  
 ## Recources Used
-&emsp; JavaScript
-&emsp; NodeJS
-&emsp; MongoDB
-&emsp; Postman
+&emsp; JavaScript <br /> 
+&emsp; NodeJS <br /> 
+&emsp; MongoDB <br /> 
+&emsp; Postman <br /> 
