@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Message = require('../models/messageModel');
 const { rawListeners, findOne } = require('../models/userModel');
+const { isObjectIdOrHexString } = require('mongoose');
 
 const sendMessage = asyncHandler (async (req, res) => {
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
@@ -30,7 +31,7 @@ const sendMessage = asyncHandler (async (req, res) => {
             direction: direction,
             username: username,
             message_type: message_type,
-            composed_at: composed_at,
+            composed_at: new Date().toISOString(),
             platform_received_at: platform_received_at,
             body: body
         })
