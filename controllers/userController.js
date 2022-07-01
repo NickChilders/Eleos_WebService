@@ -19,7 +19,7 @@ const registerUser = asyncHandler( async(req, res) => {
         res.status(400)
         throw new Error('Please add a username')
     }
-
+    
     //Check if user exists
     const userExists = await User.findOne({username})
 
@@ -28,20 +28,26 @@ const registerUser = asyncHandler( async(req, res) => {
         throw new Error('User already exists')
     }
 
+    if(!full_name) {
+        res.status(400)
+        throw new Error("Please add user's full_name")
+    }
+
+
     //Create User
     const user = await User.create({
-        api_token, 
+        api_token: generateToken(username, full_name), 
         username,
         full_name,
         menu_code,
         dashboard_code,
         custom_settings_form_code
     })
-
     if(user){
+        user.api_token = 
         res.status(201).json({
             _id: user.id,
-            api_token: generateToken(user.username, user.full_name),
+            api_token: user.api_token,
             username: user.username,
             full_name: user.username,
             menu_code: user.menu_code,
