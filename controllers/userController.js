@@ -60,7 +60,7 @@ const registerUser = asyncHandler( async(req, res) => {
 //@access   Private
 const getMe = asyncHandler(async(req, res) => {
     const token = req.params.token
-    if(req.headers["eleos-platform-key"] != process.env.JWT_SECRET){
+    if(req.headers["eleos-platform-key"] != process.env.SECRET){
         res.status(401).send("401: Invalid Eleos Platform Key!!");
     }
     else{
@@ -69,7 +69,7 @@ const getMe = asyncHandler(async(req, res) => {
             var userValue = Object.values(decoded)
             var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
 
-            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.JWT_SECRET, 'HS256')
+            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
             //Just for terminal use
             const response = {
                 api_token: encoded,
@@ -89,9 +89,9 @@ const getMe = asyncHandler(async(req, res) => {
     }
 })
 
-//Generate JWT
+//Generate JWT. This is just for exploratory purposes for register user.
 const generateToken = (username, full_name) => {
-    return jwt_encode({ username, full_name }, process.env.JWT_SECRET, 'HS256')
+    return jwt_encode({ username, full_name }, process.env.SECRET, 'HS256')
 }
 
 module.exports = {
