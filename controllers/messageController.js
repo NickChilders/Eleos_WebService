@@ -20,12 +20,12 @@ const sendMessage = asyncHandler (async (req, res) => {
             throw new Error('Please add all required fields: direction, username, message_type, composed_at, platform_received_at');
         }
         const newMessage = new Message({
-            "direction": direction,
-            "username": username,
-            "message_type": message_type,
-            "composed_at": composed_at,
-            "platform_received_at": platform_received_at,
-            "body": body
+            direction: direction,
+            username: username,
+            message_type: message_type,
+            composed_at: composed_at,
+            platform_received_at: platform_received_at,
+            body: body
         })
         newMessage.save()
         .then(res.send({"handle": req.params.handle}));
