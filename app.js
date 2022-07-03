@@ -5,7 +5,7 @@ const connectDB = require('./config/dataBaseKey');
 const bodyParser = require('body-parser');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
-const port  = process.env.PORT || 5000
+const port  = process.env.PORT || 3000
 
 
 //Connect to Database
