@@ -61,7 +61,7 @@ const registerUser = asyncHandler( async(req, res) => {
     }
 });
 
-//@desc     Get user data
+//@desc     Get authenticates user data
 //@route    GET /authenticate/:token
 //@access   Private
 const getMe = asyncHandler(async(req, res) => {

@@ -14,6 +14,9 @@ authenticate = async (token) => {
     }
 }
 
+//@desc     Retrieves list of loads 
+//@route    GET /loads/
+//@access   Public
 const getLoad = asyncHandler(async (req,res) => {
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
         res.status(401).send("401: Invalid Eleos Platform Key!!");

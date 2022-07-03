@@ -1,9 +1,11 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Message = require('../models/messageModel');
-const { rawListeners, findOne } = require('../models/userModel');
-const { isObjectIdOrHexString } = require('mongoose');
 
+
+//@desc     Sends message 
+//@route    PUT /messages/:handle
+//@access   Public
 const sendMessage = asyncHandler (async (req, res) => {
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
         res.status(401).send("401: Invalid Eleos Platform Key!!");
