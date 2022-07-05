@@ -67,6 +67,8 @@ const registerUser = asyncHandler( async(req, res) => {
 const getMe = asyncHandler(async(req, res) => {
     const token = req.params.token
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
+        //troubleshooting
+        console.log(req.headers)
         res.status(401).send("401: Invalid Eleos Platform Key!!");
     }
     else{
