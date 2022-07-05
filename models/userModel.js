@@ -23,6 +23,13 @@ const userSchema = mongoose.Schema({
     },
 },
 {
+    toJSON: {
+        transform(doc, ret) {
+        delete ret._id;
+        },
+        versionKey: false,
+    },
+{
     timestamps: true
 })
 
