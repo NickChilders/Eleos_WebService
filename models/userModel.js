@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
     },
     custom_settings_form_code: {
         type: String
-    },
+    }
 },
 {
     toJSON: {
