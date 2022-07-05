@@ -66,6 +66,8 @@ const registerUser = asyncHandler( async(req, res) => {
 //@access   Private
 const getMe = asyncHandler(async(req, res) => {
     const token = req.params.token
+    //troubleshooting
+    console.log(req.headers)
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
         //troubleshooting
         console.log(req.headers)
