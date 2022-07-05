@@ -7,7 +7,7 @@ const Message = require('../models/messageModel');
 //@route    PUT /messages/:handle
 //@access   Public
 const sendMessage = asyncHandler (async (req, res) => {
-    if(req.headers["eleos-platform-key"] != process.env.SECRET){
+    if(req.headers["eleos-platform-key"] != process.env.ELEOS_KEY){
         res.status(401).send("401: Invalid Eleos Platform Key!!");
     }
     else{
