@@ -8,6 +8,6 @@ const {
 
 
 router.post('/', registerUser)
-router.get('/authenticate/:token', getMe)
+router.get('/:token', getMe)
 
 module.exports = router

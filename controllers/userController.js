@@ -93,7 +93,7 @@ const getMe = asyncHandler(async(req, res) => {
             throw new Error('Not authorized')
         }
     }
-})
+});
 
 //Generate JWT. This is just for exploratory purposes for register user.
 const generateToken = (username, full_name) => {
