@@ -85,7 +85,8 @@ const getMe = asyncHandler(async(req, res) => {
                 dashboard_code: user.dashboard_code,
                 custom_settings_form_code: user.custom_settings_form_code
             }
-            console.log(response)
+            //troubleshooting
+            console.log(req.headers)
             res.send(response)
         } catch (error){
             console.log(error)
