@@ -71,7 +71,7 @@ const getMe = asyncHandler(async(req, res) => {
     if(req.headers["eleos-platform-key"] != process.env.SECRET){
         //troubleshooting
         console.log(req.headers)
-        res.status(401).send("401: Invalid Eleos Platform Key!!");
+        res.status(401).send(`${req.headers}401: Invalid Eleos Platform Key!!`);
     }
     else{
         try{
