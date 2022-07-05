@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: false }));
 // Body Parser Middleware
 app.use(bodyParser.json())
 
-app.use('/', require('./routes/userRoutes'));
+app.use('/authenticate', require('./routes/userRoutes'));
 app.use('/loads', require('./routes/loadRoutes'));
 app.use('/messages', require('./routes/messageRoute'));
 
