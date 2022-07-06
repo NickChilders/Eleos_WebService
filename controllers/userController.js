@@ -77,26 +77,20 @@ const getMe = asyncHandler(async(req, res) => {
     else{
         try{
             var decoded = jwtDecode(token)
-            var user = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]})
-            user.api_token = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, process.env.SECRET)
-            /*
-            var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
-            console.log(`DECODED USER: ${decoded.username} -- DECODEDFULL NAME: ${decoded.full_name}`)
+            var user = await User.findOne({username: decoded.username})
             var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.ELEOS_KEY, 'HS256')
             
             //Just for terminal use
             const response = {
-                api_token: encoded,
-                username: user.username,
-                full_name: user.full_name,
-                menu_code: user.menu_code,
-                dashboard_code: user.dashboard_code,
-                custom_settings_form_code: user.custom_settings_form_code
+               full_name : user.full_name,
+               api_token : encoded,
+               menu_code : user.menu_code,
+               dashboard_code : user.dashboard_code,
+               custom_settings_form_code : user.custom_settings_form_code,
+               username : user.username 
             }
             console.log(response)
             res.send(response)
-            */
-            res.send(user)
         } catch (error){
             console.log(error)
             res.status(401)
