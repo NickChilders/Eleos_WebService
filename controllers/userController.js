@@ -64,7 +64,7 @@ const registerUser = asyncHandler( async(req, res) => {
 //@desc     Get authenticates user data
 //@route    GET /authenticate/:token
 //@access   Private
-const getMe = asyncHandler(async(req, res) => {
+const getMe = asyncHandler(async(req, res, next) => {
     const token = req.params.token
     if(req.headers["eleos-platform-key"] != process.env.ELEOS_KEY){
         res.status(401).send("401: Invalid Eleos Platform Key!!");
@@ -72,6 +72,7 @@ const getMe = asyncHandler(async(req, res) => {
     else{
         try{
             var decoded = jwt_decode(token)
+            next()
             var userValue = Object.values(decoded)
             var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
 
