@@ -77,7 +77,7 @@ const getMe = asyncHandler(async(req, res) => {
     else{
         try{
             var decoded = jwtDecode(token)
-            var user = await User.findOne({username: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]})
+            var user = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]})
             user.api_token = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, process.env.SECRET)
             /*
             var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
