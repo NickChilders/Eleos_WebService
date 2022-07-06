@@ -74,12 +74,23 @@ const getMe = asyncHandler(async(req, res) => {
         res.status(401).send("401: Invalid Eleos Platform Key!!");
     }
     else{
+        var jwtDecode = jwt_decode(token);
+        User.findOne({ username: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]})
+        .then((user) => {
+          user.api_token = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, process.env.SECRET);
+            res.send(user)
+          }).catch((err) => {
+             console.log(err);
+             res.status(401);
+         });
+
+        /*
         try{
             var decoded = jwt_decode(token)
             var userValue = Object.values(decoded)
             var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
-            user.api_token = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
-/*            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
+
+            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
 
             //Just for terminal use
             const response = {
@@ -90,14 +101,15 @@ const getMe = asyncHandler(async(req, res) => {
                 dashboard_code: user.dashboard_code,
                 custom_settings_form_code: user.custom_settings_form_code
             }
-*/            console.log(user)
-            //console.log(response)
+            console.log(response)
             res.send(user)
         } catch (error){
             console.log(error)
             res.status(401)
             throw new Error('Not authorized')
         }
+
+        */
     }
 });
 
