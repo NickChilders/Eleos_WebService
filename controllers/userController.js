@@ -108,6 +108,6 @@ const generateToken = (username, full_name) => {
 }
 */
 module.exports = {
-    registerUser,
+//    registerUser,
     getMe
 }
