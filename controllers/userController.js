@@ -68,7 +68,7 @@ const registerUser = asyncHandler( async(req, res) => {
 //@desc     Get authenticates user data
 //@route    GET /authenticate/:token
 //@access   Private
-const getMe = asyncHandler(async(req, res, next) => {
+const getMe = asyncHandler(async(req, res) => {
     const token = req.params.token
     if(req.headers["eleos-platform-key"] != process.env.ELEOS_KEY){
         res.status(401).send("401: Invalid Eleos Platform Key!!");
@@ -76,11 +76,11 @@ const getMe = asyncHandler(async(req, res, next) => {
     else{
         try{
             var decoded = jwt_decode(token)
-            next()
             var userValue = Object.values(decoded)
             var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
+            user.api_token = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
+/*            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
 
-            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
             //Just for terminal use
             const response = {
                 api_token: encoded,
@@ -90,7 +90,8 @@ const getMe = asyncHandler(async(req, res, next) => {
                 dashboard_code: user.dashboard_code,
                 custom_settings_form_code: user.custom_settings_form_code
             }
-            console.log(response)
+*/            console.log(user)
+            //console.log(response)
             res.send(user)
         } catch (error){
             console.log(error)
