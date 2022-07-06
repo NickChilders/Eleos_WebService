@@ -78,7 +78,7 @@ const getMe = asyncHandler(async(req, res) => {
         try{
             var decoded = jwtDecode(token)
             var user = await User.findOne({username: decoded.username})
-            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.ELEOS_KEY, 'HS256')
+            var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.ELEOS_KEY)
             
             //Just for terminal use
             const response = {
