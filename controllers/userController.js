@@ -87,7 +87,7 @@ const getMe = asyncHandler(async(req, res, next) => {
                 custom_settings_form_code: user.custom_settings_form_code
             }
             console.log(response)
-            res.send(response)
+            res.send(user)
         } catch (error){
             console.log(error)
             res.status(401)
