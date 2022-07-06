@@ -74,17 +74,6 @@ const getMe = asyncHandler(async(req, res) => {
         res.status(401).send("401: Invalid Eleos Platform Key!!");
     }
     else{
-        var jwtDecode = jwt_decode(token);
-        User.findOne({ username: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]})
-        .then((user) => {
-          user.api_token = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, process.env.SECRET);
-            res.send(user)
-          }).catch((err) => {
-             console.log(err);
-             res.status(401);
-         });
-
-        /*
         try{
             var decoded = jwt_decode(token)
             var userValue = Object.values(decoded)
@@ -108,8 +97,6 @@ const getMe = asyncHandler(async(req, res) => {
             res.status(401)
             throw new Error('Not authorized')
         }
-
-        */
     }
 });
 
