@@ -3,6 +3,8 @@ const jwt_decode = require('jwt-decode');
 const jwt_encode = require('jwt-encode');
 const User = require('../models/userModel')
 
+
+/*
 //@desc     Makes new user in database. Just for exploratory purposes. 
 //@route    POST /user
 //@access   Public
@@ -60,6 +62,8 @@ const registerUser = asyncHandler( async(req, res) => {
         throw new Error('Invalid user data')
     }
 });
+*/
+
 
 //@desc     Get authenticates user data
 //@route    GET /authenticate/:token
@@ -96,11 +100,13 @@ const getMe = asyncHandler(async(req, res, next) => {
     }
 });
 
+
+/*
 //Generate JWT. This is just for exploratory purposes for register user.
 const generateToken = (username, full_name) => {
     return jwt_encode({ username, full_name }, process.env.SECRET, 'HS256')
 }
-
+*/
 module.exports = {
     registerUser,
     getMe
