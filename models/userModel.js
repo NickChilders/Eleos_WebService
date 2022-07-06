@@ -20,10 +20,16 @@ const userSchema = mongoose.Schema({
     },
     custom_settings_form_code: {
         type: String
-    },
+    }
 },
 {
-    timestamps: true
-})
+    toJSON: {
+        transform(doc, ret) {
+        delete ret._id;
+        },
+        versionKey: false,
+    },
+    
+});
 
 module.exports = mongoose.model('User', userSchema)
