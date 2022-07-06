@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const { default: jwtDecode } = require('jwt-decode');
 const jwt_decode = require('jwt-decode');
 const jwt_encode = require('jwt-encode');
 const User = require('../models/userModel')
@@ -75,11 +76,14 @@ const getMe = asyncHandler(async(req, res) => {
     }
     else{
         try{
-            var decoded = jwt_decode(token)
-            var userValue = Object.values(decoded)
+            var decoded = jwtDecode(token)
+            var user = await User.findOne({username: jwtDecode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]})
+            user.api_token = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, process.env.SECRET)
+            /*
             var user = await User.findOne({username: decoded.username, full_name: decoded.full_name})
             console.log(`DECODED USER: ${decoded.username} -- DECODEDFULL NAME: ${decoded.full_name}`)
             var encoded = jwt_encode({username: user.username, full_name: user.full_name}, process.env.ELEOS_KEY, 'HS256')
+            
             //Just for terminal use
             const response = {
                 api_token: encoded,
@@ -91,6 +95,8 @@ const getMe = asyncHandler(async(req, res) => {
             }
             console.log(response)
             res.send(response)
+            */
+            res.send(user)
         } catch (error){
             console.log(error)
             res.status(401)
