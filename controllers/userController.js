@@ -78,8 +78,7 @@ const getMe = asyncHandler(async(req, res) => {
         try{
             var decoded = jwt_decode(token)
             var user = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"], full_name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]})
-            user.api_token = jwt_encode({username: user.username, full_name: user.full_name}, process.env.SECRET, 'HS256')
-            
+            user.api_token = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name }, process.env.SECRET, 'HS256');
             //Just for terminal use
             const response = {
                 api_token: user.api_token,
