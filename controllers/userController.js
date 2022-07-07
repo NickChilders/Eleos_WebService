@@ -81,7 +81,7 @@ const getMe = asyncHandler(async(req, res) => {
             var user = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"], full_name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]})
             console.log(`DECODED VALUES: ${userData}`)
             encoded = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": Object.values(decoded)[0], "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": Object.values(decoded)[1]}, process.env.SECRET, 'HS256');
-            //Just for terminal use
+/*            //Just for terminal use
             const response = {
                 api_token: encoded,
                 username: user.username,
@@ -90,11 +90,11 @@ const getMe = asyncHandler(async(req, res) => {
                 dashboard_code: user.dashboard_code,
                 custom_settings_form_code: user.custom_settings_form_code
             }
-            const se = {
+*/            const se = {
                 api_token: encoded,
-                full_name: user.full_name
+                full_name: Object.values(decoded)[1]
             }
-            console.log(response)
+//            console.log(response)
             res.send(se)
         } catch (error){
             console.log(error)
