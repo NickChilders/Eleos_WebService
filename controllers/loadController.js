@@ -29,19 +29,7 @@ const getLoad = asyncHandler(async (req,res) => {
                 res.status(401).send("Error: Invalid User Token");
             }
             else{
-                var loadList = await Load.find()
-                res.send(loadList)
-/*                
-                Load.find()
-                .then(loads => res.send(loads))
-                .catch((error) => {
-                    res.status(401);
-                    console.log(error)
-                });
-                //Just for terminal use
-                Load.find()
-                .then(consoleLoads => console.log(consoleLoads))
-*/            
+                res.send(await Load.find())           
             }            
         }catch(error){
             res.status(401);
