@@ -6,7 +6,7 @@ const Load = require('../models/loadModel');
 
 authenticate = async (token) => {
     var decoded = jwt_decode(token, process.env.SECRET, true, 'HS256')
-    var user = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"], full_name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]})
+    var user = await User.findOne({username: Object.values(decoded)[0], full_name: Object.values(decoded)[1]})
     if(user.username == Object.values(decoded)[0]){
         return true
     } else{
