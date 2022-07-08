@@ -6,8 +6,9 @@ const Load = require('../models/loadModel');
 
 authenticate = async (token) => {
     var decoded = jwt_decode(token, process.env.SECRET, true, 'HS256')
-    const user = await User.findOne({username: Object.values(decoded)[0], full_name: Object.values(decoded)[1]})
-    if(user.username == Object.values(decoded)[0]){
+    var user = Object.values(decoded)[0]
+    const userExists = await User.findOne({user})
+    if(userExists){
         return true
     } else{
         return false
