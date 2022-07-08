@@ -77,7 +77,7 @@ const getMe = asyncHandler(async(req, res) => {
     else{
         try{
             var decoded = jwt_decode(token)
-            const userExists = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"], full_name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]})
+            const userExists = await User.findOne({username: Object.values(decoded)[0]})
             if(!userExists){
                 res.status(401)
                 throw new Error(`User: ${userExists} does not exist`)
