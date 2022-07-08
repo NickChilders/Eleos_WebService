@@ -77,7 +77,8 @@ const getMe = asyncHandler(async(req, res) => {
     else{
         try{
             var decoded = jwt_decode(token)
-            const userExists = await User.findOne({username: Object.values(decoded)[0]})
+            var user = Object.values(decoded)[0]
+            const userExists = await User.findOne({user})
             if(!userExists){
                 res.status(401)
                 throw new Error(`User: ${userExists} does not exist`)
