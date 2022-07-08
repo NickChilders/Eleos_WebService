@@ -77,8 +77,12 @@ const getMe = asyncHandler(async(req, res) => {
     else{
         try{
             var decoded = jwt_decode(token)
-            var user = await User.findOne({username: Object.values(decoded)[0], full_name: Object.values(decoded)[1]})
-            encoded = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": user.username, "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": user.full_name}, process.env.SECRET, 'HS256');
+            const userExists = await User.findOne({username: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"], full_name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]})
+            if(!userExists){
+                res.status(401)
+                throw new Error(`User: ${userExists.username} does not exist`)
+            }
+            encoded = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": Object.values(decoded)[0], "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": Object.values(decoded)[1]}, process.env.SECRET, 'HS256');
 /*            //Just for terminal use
             const response = {
                 api_token: encoded,
