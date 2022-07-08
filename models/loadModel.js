@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const loadSchema = new mongoose.Schema(
+const loadSchema = mongoose.Schema(
     {
         id: {
             type: String,
