@@ -46,4 +46,4 @@ const loadSchema = mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Loads', loadSchema, "loads")
+module.exports = mongoose.model('loads', loadSchema, "loads")
