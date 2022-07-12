@@ -2,6 +2,8 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Message = require('../models/messageModel');
 
+var duplicateHandle = "";
+
 //@desc     Sends message 
 //@route    PUT /messages/:handle
 //@access   Public
@@ -22,6 +24,16 @@ const sendMessage = asyncHandler (async (req, res) => {
             res.status(400)
             throw new Error('Please add all required fields: direction, username, message_type, composed_at, platform_received_at')
         }
+        
+        //Checking for duplicate handles to avoid duplicate requests
+        if(duplicateHandle == req.params.handle){
+            res.status(400)
+            throw new Error('Handle has already been used. Possible duplicate. Ignore.')
+        }
+        else{
+            duplicateHandle = req.params.handle 
+        }
+
         const newMessage = new Message({
             direction: direction,
             username: username,
