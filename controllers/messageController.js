@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Message = require('../models/messageModel');
 
-
 //@desc     Sends message 
 //@route    PUT /messages/:handle
 //@access   Public
@@ -41,7 +40,6 @@ const sendMessage = asyncHandler (async (req, res) => {
         .then(res.send({"handle": req.params.handle}));
         //This is just for terminal use
         console.log(newMessage)
-        //.then(res.send(`<h1>Received</h1> <p>${newMessage.body}</p>`))
     }
 });
 

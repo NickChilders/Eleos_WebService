@@ -3,11 +3,11 @@ const router = express.Router()
 
 const {
     registerUser,
-    getMe
+    getAuth
 } = require('../controllers/userController')
 
 
 router.post('/', registerUser)
-router.get('/:token', getMe)
+router.get('/:token', getAuth)
 
 module.exports = router

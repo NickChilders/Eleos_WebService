@@ -28,8 +28,8 @@ const userSchema = mongoose.Schema({
         delete ret._id;
         },
         versionKey: false,
-    },
-    
+    },    
 });
-
+//By default, Mongoose makes the collection plural and lowercase unless specified.
+//Collection therefore, is 'users'
 module.exports = mongoose.model('User', userSchema)

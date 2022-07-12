@@ -1,17 +1,20 @@
 const asyncHandler = require('express-async-handler')
-const { default: jwtDecode } = require('jwt-decode');
 const jwt_decode = require('jwt-decode');
 const jwt_encode = require('jwt-encode');
 const User = require('../models/userModel')
 
 
+//Generate JWT. 
+//This is just for personal exploratory purposes to make a user.
+const generateToken = (username, full_name) => {
+    return jwt_encode({ username, full_name }, process.env.SECRET, 'HS256')
+}
 
 //@desc     Makes new user in database. Just for exploratory purposes. 
 //@route    POST /user
 //@access   Public
 const registerUser = asyncHandler( async(req, res) => {
     const {
-        api_token,
         username, 
         full_name,
         menu_code,
@@ -35,7 +38,6 @@ const registerUser = asyncHandler( async(req, res) => {
         res.status(400)
         throw new Error("Please add user's full_name")
     }
-
 
     //Create User
     const user = await User.create({
@@ -64,12 +66,10 @@ const registerUser = asyncHandler( async(req, res) => {
     }
 });
 
-
-
-//@desc     Get authenticates user data
+//@desc     Authenticates user data
 //@route    GET /authenticate/:token
 //@access   Private
-const getMe = asyncHandler(async(req, res) => {
+const getAuth = asyncHandler(async(req, res) => {
     const token = req.params.token
     if(req.headers["eleos-platform-key"] != process.env.ELEOS_KEY){
         res.status(401).send("401: Invalid Eleos Platform Key!!");
@@ -84,20 +84,10 @@ const getMe = asyncHandler(async(req, res) => {
                 throw new Error(`User: ${userExists} does not exist`)
             }
             encoded = jwt_encode({"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": Object.values(decoded)[0], "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": Object.values(decoded)[1]}, process.env.SECRET, 'HS256');
-/*            //Just for terminal use
-            const response = {
-                api_token: encoded,
-                username: user.username,
-                full_name: user.full_name,
-                menu_code: user.menu_code,
-                dashboard_code: user.dashboard_code,
-                custom_settings_form_code: user.custom_settings_form_code
-            }
-*/            const response = {
+           const response = {
                 api_token: encoded,
                 full_name: Object.values(decoded)[1]
             }
-//            console.log(response)
             res.send(response)
         } catch (error){
             console.log(error)
@@ -107,14 +97,7 @@ const getMe = asyncHandler(async(req, res) => {
     }
 });
 
-
-
-//Generate JWT. This is just for exploratory purposes for register user.
-const generateToken = (username, full_name) => {
-    return jwt_encode({ username, full_name }, process.env.SECRET, 'HS256')
-}
-
 module.exports = {
     registerUser,
-    getMe
+    getAuth
 }

@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const jwt_decode = require('jwt-decode');
-const jwt_encode = require('jwt-encode');
 const User = require('../models/userModel');
 const Load = require('../models/loadModel');
 

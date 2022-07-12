@@ -7,7 +7,6 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 
 const port  = process.env.PORT || 3000
 
-
 //Connect to Database
 connectDB()
 

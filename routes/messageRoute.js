@@ -5,7 +5,6 @@ const {
     sendMessage
 } = require('../controllers/messageController')
 
-
 router.put('/:handle', sendMessage)
 
 module.exports = router
