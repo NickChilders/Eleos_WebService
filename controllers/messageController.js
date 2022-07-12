@@ -32,7 +32,7 @@ const sendMessage = asyncHandler (async (req, res) => {
         })
         newMessage.save()
         .then(res.send({"handle": req.params.handle}));
-        //This is just for terminal use
+        //This is just for terminal/exploratory use
         console.log(newMessage)
     }
 });
