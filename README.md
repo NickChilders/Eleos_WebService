@@ -1,6 +1,5 @@
 # Eleos_WebService
 Nick Childers
-### Update: Still in production.
 
 ## Endpoints:
 &emsp; /authenticate <br /> 
@@ -12,3 +11,6 @@ Nick Childers
 &emsp; NodeJS <br /> 
 &emsp; MongoDB <br /> 
 &emsp; Postman <br /> 
+
+### Base URL:
+&emsp; https://nick-integration.herokuapp.com/ <br />
