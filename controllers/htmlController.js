@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler')
 var path = require('path')
 
-const getPage = asyncHandler( async(req,res) => {
+const getHomePage = asyncHandler( async(req,res) => {
     try{
         res.sendFile(path.join(__dirname, '../public/index.html'));
     }
@@ -12,4 +12,17 @@ const getPage = asyncHandler( async(req,res) => {
     }
 });
 
-module.exports = getPage;
+const contactPage = asyncHandler( async(req,res) => {
+    try{
+        res.sendFile(path.join(__dirname, '../public/index2.html'));
+    }
+    catch (error){
+        console.log(error)
+        throw new Error(`ERROR: ${error}`)
+    }
+});
+
+module.exports = {
+    getHomePage,
+    contactPage
+};
