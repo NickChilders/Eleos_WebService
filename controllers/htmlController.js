@@ -12,17 +12,4 @@ const getHomePage = asyncHandler( async(req,res) => {
     }
 });
 
-const contactPage = asyncHandler( async(req,res) => {
-    try{
-        res.sendFile(path.join(__dirname, '../public/index2.html'));
-    }
-    catch (error){
-        console.log(error)
-        throw new Error(`ERROR: ${error}`)
-    }
-});
-
-module.exports = {
-    getHomePage,
-    contactPage
-};
+module.exports = getHomePage;
