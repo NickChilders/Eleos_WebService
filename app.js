@@ -1,3 +1,7 @@
+//Nick Childers
+//QA Analyst
+//Eleos Technologies
+
 const express = require('express');
 const dotenv = require('dotenv').config()
 const colors = require('colors')
@@ -19,7 +23,7 @@ app.use(express.urlencoded({extended: false }));
 // Body Parser Middleware
 app.use(bodyParser.json())
 
-// For Base URL Page
+// For Base URL Page. Not neccessart, but I like it.
 app.use(express.static(path.join(__dirname, './public')))
 app.use('/', require('./routes/htmlRoute'));
 
