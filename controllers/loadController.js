@@ -15,7 +15,7 @@ authenticate = async (token) => {
 }
 
 //@desc     Retrieves list of loads 
-//@route    GET /loads/
+//@route    GET /loads
 //@access   Public
 const getLoad = asyncHandler(async (req,res) => {
     if(req.headers["eleos-platform-key"] != process.env.ELEOS_KEY){

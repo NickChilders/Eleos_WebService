@@ -10,7 +10,7 @@ const generateToken = (username, full_name) => {
     return jwt_encode({ username, full_name }, process.env.SECRET, 'HS256')
 }
 
-//@desc     Makes new user in database. Just for exploratory purposes. 
+//@desc     Makes new user in database. This is just for my exploratory purposes. 
 //@route    POST /user
 //@access   Public
 const registerUser = asyncHandler( async(req, res) => {
