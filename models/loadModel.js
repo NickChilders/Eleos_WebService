@@ -46,5 +46,5 @@ const loadSchema = mongoose.Schema(
     }
 );
 //By default, Mongoose makes the collection plural and lowercase unless specified
-//Collection therefore, is 'loads'
+//Collection therefore, is 'loads'.
 module.exports = mongoose.model('Loads', loadSchema)

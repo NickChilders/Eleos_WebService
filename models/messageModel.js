@@ -30,5 +30,5 @@ const messageSchema = mongoose.Schema({
     timestamps: true
 })
 //By default, Mongoose makes the collection plural and lowercase unless specified.
-//Collection therefore, is 'messages'
+//Collection therefore, is 'messages'.
 module.exports = mongoose.model('Messages', messageSchema)
