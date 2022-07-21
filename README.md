@@ -1,5 +1,7 @@
 # Eleos_WebService
-Nick Childers
+Nick Childers <br />
+
+This was a pretty fun project and a great opportunity to learn. Had some interesting bugs that I was finally able to overcome. Learned a lot, especially with making databases and APIs in general. <br />
 
 ## Endpoints:
 &emsp; /authenticate <br /> 
